@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+    <title>Real Time Clock</title>
+</head>
+<body onload="realTime()">
+    <div class="Date-Time">
+      <div class="Date">
+        <span id="Year">Year</span>-
+        <span id="Month">month</span>-
+        <span id="Day">day</span>
+      </div>
+      <div class="Time">
+        <span id="Hour">Hour</span>:
+        <span id="Minute">Minute</span>:
+        <span id="Second">Second</span> 
+        <span id="Period">Period</span>
+      </div>
+    </div>
+    <script>
+        const updateTime=()=>{
+          let nowTime=new Date();
+          let d=nowTime.getDate();
+          if(d<10)d='0'+d;
+          let m=nowTime.getMonth();
+          let y=nowTime.getFullYear();
+          let hr=nowTime.getHours();
+          let min=nowTime.getMinutes();
+          if(min<10)min='0'+min;
+          let sec=nowTime.getSeconds();
+          if(sec<10)sec='0'+sec;
+          let pr="AM";
+          if(hr>12){
+            hr=hr-12;
+            pr="PM";
+          }
+          if(hr<10)hr='0'+hr;
+          let month=["January","February","March","April","May","June","July","August","September","October","November","Decemeber"]
+          document.getElementById("Day").firstChild.nodeValue=d;
+          document.getElementById("Month").firstChild.nodeValue=month[m];
+          document.getElementById("Year").firstChild.nodeValue=y;
+          document.getElementById("Hour").firstChild.nodeValue=hr;
+          document.getElementById("Minute").firstChild.nodeValue=min;
+          document.getElementById("Second").firstChild.nodeValue=sec;
+          document.getElementById("Period").firstChild.nodeValue=pr;
+        }
+        const realTime=()=>{
+            updateTime();
+            window.setInterval("updateTime()",1);
+        }
+    </script>
+</body>
+</html>
